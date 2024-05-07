@@ -6,7 +6,8 @@ import CreatePhonebookForm from './CreatePhonebookForm/CreatePhonebookForm';
 import styles from './App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { ADD_USER, USERS } from 'store/users/types';
-import { usersAction } from 'store/users/actions';
+// import { usersAction } from 'store/users/actions';
+import { addUsers } from 'store/users/slice';
 
 const App = () => {
   const [contacts, setContacts] = useState(() => {
@@ -64,7 +65,9 @@ const App = () => {
 
   const handleDispatch = () => {
     // dispatch({ type: USERS, payload: [123] });
-    dispatch(usersAction([123]));
+    // dispatch(usersAction([123]));
+    dispatch(addUsers(['qwe']));
+
     // dispatch({ type: ADD_USER, payload: [321] });
     // dispatch(addUsersAction([321]));
   };

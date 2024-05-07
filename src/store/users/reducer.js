@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 // import { ADD_USER, USERS } from './types';
-import { usersAction } from './actions';
+import { addUsersAction, usersAction } from './actions';
 
 const initialState = { users: [] };
 
@@ -12,7 +12,10 @@ const initialState = { users: [] };
 // };
 
 export const usersReducer = createReducer(initialState, builder => {
-  builder.addCase(usersAction, (state, { payload }) => {
+  builder
+    .addCase(usersAction, (state, { payload }) => {
     return { ...state, users: payload };
+  }).addCase(addUsersAction, (state, { payload }) => {
+    return { ...state, users: [...state.users, payload] };
   });
 });
