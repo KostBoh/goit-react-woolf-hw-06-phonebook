@@ -4,9 +4,6 @@ import ContactList from './ContactList/ContactList';
 import { nanoid } from 'nanoid';
 import CreatePhonebookForm from './CreatePhonebookForm/CreatePhonebookForm';
 import styles from './App.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-// import { ADD_USER, USERS } from 'store/users/types';
-import { usersAction } from 'store/users/actions';
 
 const App = () => {
   const [contacts, setContacts] = useState(() => {
@@ -56,25 +53,9 @@ const App = () => {
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const data = useSelector(state => state.users.users);
-
-  const dispatch = useDispatch();
-
-  console.log(data);
-
-  const handleDispatch = () => {
-    // dispatch({ type: USERS, payload: [123] });
-    dispatch(usersAction([123]));
-    // dispatch({ type: ADD_USER, payload: [321] });
-    // dispatch(addUsersAction([321]));
-  };
-
   return (
     <div className={styles.container}>
       <h1 className={styles.heading}>Phonebook</h1>
-
-      <button onClick={handleDispatch}>Action</button>
-
       <CreatePhonebookForm submit={createNewContact} />
       <h2 className={styles.subheading}>Contacts</h2>
       <Filter value={filter} onChange={handleFilterChange} />
