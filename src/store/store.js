@@ -1,6 +1,5 @@
-// import { createStore } from 'redux';
+import { createStore } from 'redux';
 import { reducer } from './reducer';
-import { configureStore } from '@reduxjs/toolkit';
 
 // const reducer = (state, action) => {
 //   if (action.type === 'number') return { ...state, number: action.payload };
@@ -10,7 +9,7 @@ import { configureStore } from '@reduxjs/toolkit';
 //   else return state;
 // };
 
-export const store = configureStore({ reducer });
+export const store = createStore(reducer);
 // console.log(store.getState());
 
 // store.dispatch({ type: 'number', payload: 123 });
