@@ -3,16 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../../store/contactsSlice';
 
 import styles from './ContactList.module.css';
+import { selectContacts, selectFilter } from 'store/selectors';
 
 const ContactList = () => {
-  const contacts = useSelector(state => state.data);
-  const filter = useSelector(state => state.filter || '');
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const filteredContacts = useSelector(state =>
-    state.data.filter(contact =>
-      contact.name.toLowerCase().includes(state.filter.toLowerCase())
-    )
+  const filteredContacts = React.useMemo(
+    () =>
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      ),
+    [contacts, filter]
   );
 
   const onDeleteContact = id => {

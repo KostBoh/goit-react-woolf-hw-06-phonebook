@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import styles from './CreatePhonebookForm.module.css';
+import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../../store/contactsSlice';
 import { nanoid } from 'nanoid';
-
-import styles from './CreatePhonebookForm.module.css';
+import { selectContacts } from 'store/selectors';
 
 const CreatePhonebookForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    const contactExists = contacts.some(
+      contact => contact.name === name || contact.number === number
+    );
+
+    if (contactExists) {
+      alert("Контакт з таким ім'ям або номером вже існує!");
+      return;
+    }
+
     dispatch(addContact({ id: nanoid(), name, number }));
     setName('');
     setNumber('');
